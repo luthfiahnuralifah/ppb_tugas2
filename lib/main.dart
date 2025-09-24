@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,11 +19,11 @@ class MyApp extends StatelessWidget {
 }
 
 class Todo {
-  int id;
-  String text;
-  bool isCompleted;
-  Priority priority;
-  String category;
+  final int id;
+  final String text;
+  final bool isCompleted;
+  final Priority priority;
+  final String category;
 
   Todo({
     required this.id,
@@ -43,7 +45,7 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   List<Todo> todos = [
-    Todo(id: 1, text: 'Olahraga Pagi 🏃‍♀️', priority: Priority.high),
+    Todo(id: 1, text: 'Olahraga Pagi 🏃‍♀', priority: Priority.high),
     Todo(id: 2, text: 'Baca Buku 📖', priority: Priority.medium),
     Todo(id: 3, text: 'Masak Menu Baru 🍳', priority: Priority.low),
     Todo(
@@ -56,12 +58,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
       text: 'Ngonten untuk Media Sosial 🎥',
       priority: Priority.medium,
     ),
-    Todo(id: 6, text: 'Meditasi & Me Time 🧘‍♀️', isCompleted: true),
+    Todo(id: 6, text: 'Meditasi & Me Time 🧘‍♀', isCompleted: true),
     Todo(id: 7, text: 'Bersih-bersih Kamar 🧹', priority: Priority.low),
   ];
 
   FilterType currentFilter = FilterType.all;
-  TextEditingController textController = TextEditingController();
+  final TextEditingController textController = TextEditingController();
 
   void toggleTodo(int id) {
     setState(() {
@@ -127,8 +129,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
             // Header
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.pinkAccent, Colors.purpleAccent],
                   begin: Alignment.topLeft,
@@ -138,7 +140,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "🌸 To-Do List 🌸",
                     style: TextStyle(
                       fontSize: 26,
@@ -146,7 +148,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       color: Colors.white,
                     ),
                   ),
-
                   const Text(
                     "Luthfiah Nur Alifah - 2309106102",
                     style: TextStyle(
@@ -155,9 +156,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 20),
-
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       buildStatCard(totalTodos, "Total", Colors.pink),
@@ -165,7 +164,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       buildStatCard(pendingTodos, "Pending", Colors.orange),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       buildFilterButton("Semua", FilterType.all),
@@ -179,21 +178,21 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
             // Input tambah tugas
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: Colors.white,
               child: Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: textController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: "Tambah aktivitas baru...",
                         border: InputBorder.none,
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.add_circle,
                       color: Colors.pinkAccent,
                       size: 32,
@@ -207,7 +206,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             // List Tugas
             Expanded(
               child: filteredTodos.isEmpty
-                  ? Center(child: Text("Belum ada aktivitas 😴"))
+                  ? const Center(child: Text("Belum ada aktivitas 😴"))
                   : ListView.builder(
                       itemCount: filteredTodos.length,
                       itemBuilder: (context, index) {
@@ -224,8 +223,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget buildStatCard(int value, String label, Color color) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 6),
-        padding: EdgeInsets.symmetric(vertical: 14),
+        margin: const EdgeInsets.symmetric(horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(15),
@@ -234,13 +233,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
           children: [
             Text(
               value.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            Text(label, style: TextStyle(color: Colors.white70)),
+            Text(label, style: const TextStyle(color: Colors.white70)),
           ],
         ),
       ),
@@ -257,8 +256,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
           });
         },
         child: Container(
-          margin: EdgeInsets.all(4),
-          padding: EdgeInsets.symmetric(vertical: 10),
+          margin: const EdgeInsets.all(4),
+          padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             color: isSelected ? Colors.pinkAccent : Colors.white,
             borderRadius: BorderRadius.circular(12),
@@ -279,12 +278,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
 
   Widget buildTodoItem(Todo todo) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: todo.isCompleted ? Colors.pink.shade100 : Colors.white,
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
       ),
@@ -297,33 +296,30 @@ class _TodoListScreenState extends State<TodoListScreen> {
               height: 22,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: todo.isCompleted
-                    ? Colors.pinkAccent
-                    : Colors.transparent,
+                color: todo.isCompleted ? Colors.pinkAccent : Colors.transparent,
                 border: Border.all(color: Colors.pinkAccent, width: 2),
               ),
               child: todo.isCompleted
-                  ? Icon(Icons.check, color: Colors.white, size: 16)
+                  ? const Icon(Icons.check, color: Colors.white, size: 16)
                   : null,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Text(
               todo.text,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                decoration: todo.isCompleted
-                    ? TextDecoration.lineThrough
-                    : null,
+                decoration:
+                    todo.isCompleted ? TextDecoration.lineThrough : null,
                 color: todo.isCompleted ? Colors.grey : Colors.black87,
               ),
             ),
           ),
           GestureDetector(
             onTap: () => deleteTodo(todo.id),
-            child: Icon(Icons.delete_outline, color: Colors.red),
+            child: const Icon(Icons.delete_outline, color: Colors.red),
           ),
         ],
       ),
